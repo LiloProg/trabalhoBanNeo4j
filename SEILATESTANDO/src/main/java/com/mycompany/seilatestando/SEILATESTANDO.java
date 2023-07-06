@@ -37,7 +37,7 @@ public class SEILATESTANDO {
         System.out.println("13. Add Produto     \t 14. Delete Produto     \t 15. Update Produto      \t 16. List Produto       |");
         System.out.println("17. Add Pedido      \t 18. Delete Pedido      \t 19. Update Pedido       \t 20. List Pedido        |");
         System.out.println("21. cliente/pedido      || 22. produto/material || 23. pedido/funcionario || 24. pedido/produto         \t|LISTAS");
-        System.out.println("25. produto mediano     || 26. pedido murilos   || 27. pedido pequeno     ||                            \t|RELATORIOS");
+        System.out.println("25. produto mediano     || 26. pedido murilos   || 27. pedido pix         ||                            \t|RELATORIOS");
         System.out.println("28. Exit");
         System.out.println("==========================================================================================================");
         System.out.print("Enter your choice: ");
