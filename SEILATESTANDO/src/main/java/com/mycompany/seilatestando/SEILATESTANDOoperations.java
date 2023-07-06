@@ -401,6 +401,20 @@ public class SEILATESTANDOoperations {
                 parameters("peID", pedidoObject.getPeID(), "clienteId", pedidoObject.getClienteId(),
                     "funcionarioId", pedidoObject.getFuncionarioId(), "produtoId", pedidoObject.getProdutoId(), "precoPed", 
                     pedidoObject.getPrecoPed(), "metdPagamento", pedidoObject.getMetdPagamento()));
+            
+            // Criaçao do relacionamento entre Pedido e Cliente.
+            session.run("MATCH (pe:Pedido {peID: $peID}), (cl:Cliente {clID: $clienteId}) CREATE (pe)-[:PEDIDO_DO_CLIENTE]->(cl)",
+                parameters("peID", pedidoObject.getPeID(), "clienteId", pedidoObject.getClienteId()));
+            
+            // Criação do relacionamento entre Pedido e Funcionário
+            session.run("MATCH (pe:Pedido {peID: $peID}), (fu:Funcionario {fuID: $funcionarioId}) CREATE (pe)-[:PEDIDO_DO_FUNCIONARIO]->(fu)",
+                parameters("peID", pedidoObject.getPeID(), "funcionarioId", pedidoObject.getFuncionarioId()));
+
+            // Criação do relacionamento entre Pedido e Produto
+            session.run("MATCH (pe:Pedido {peID: $peID}), (pr:Produto {prID: $produtoId}) CREATE (pe)-[:PEDIDO_DO_PRODUTO]->(pr)",
+                    parameters("peID", pedidoObject.getPeID(), "produtoId", pedidoObject.getProdutoId()));
+
+            
             System.out.println("Pedido added successfully!");
         }
     }
