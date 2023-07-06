@@ -47,7 +47,7 @@ public class SEILATESTANDOoperations {
             System.out.print("Enter rua: ");
             String rua = scanner.nextLine();
 
-            // Create a new clienteBeanTest object with the user input
+            // Criar um clienteBeanTest com input do user.
             clienteBeanTest clienteObject = new clienteBeanTest(cliente, telefone, numero, clID, cep, rua);   
             //Adicionando uma pessoa
             session.run("CREATE (cl:Cliente {cliente: $cliente, telefone: $telefone, numero: $numero, clID: $clID, cep: $cep, rua: $rua})",
@@ -60,11 +60,11 @@ public class SEILATESTANDOoperations {
 
     public void deleteCliente() {
         try (Session session = driver.session()) {
-            // Your deleteCliente logic goes here
+            
         System.out.print("Enter clID of the cliente to delete: ");
         String clID = scanner.nextLine();
 
-        // Execute the Cypher query to delete the cliente
+        // Executar query do Cypher para deletar
         session.run("MATCH (cl:Cliente {clID: $clID}) OPTIONAL MATCH (cl)-[r1]-() DELETE r1, cl;",
                 Values.parameters("clID", clID));
 
@@ -74,14 +74,14 @@ public class SEILATESTANDOoperations {
 
     public void updateCliente() {
         try (Session session = driver.session()) {
-            // Your updateCliente logic goes here
+            
         System.out.print("Enter clID to update: ");
         String clID = scanner.nextLine();
 
         System.out.print("Enter new cliente name: ");
         String clienteName = scanner.nextLine();
 
-        // Rest of the code remains the same
+        
         System.out.print("Enter new telefone: ");
         String telefone = scanner.nextLine();
 
@@ -93,7 +93,7 @@ public class SEILATESTANDOoperations {
 
         System.out.print("Enter new rua: ");
         String rua = scanner.nextLine();
-        // Execute the Cypher query to update the cliente
+        // Executar Query Cypher para dar update
         session.run("MATCH (cl:Cliente {clID: $clID}) SET cl.cliente = $cliente, cl.telefone = $telefone, cl.numero = $numero, cl.cep = $cep, cl.rua = $rua",
                 Values.parameters("clID", clID, "cliente", clienteName, "telefone", telefone,
                         "numero", numero, "cep", cep,
@@ -105,8 +105,8 @@ public class SEILATESTANDOoperations {
 
     public void listCliente() {
         try (Session session = driver.session()) {
-            // Your listClientes logic goes here
-        // Execute the Cypher query to fetch all clientes
+            
+        //Executar query do cypher para pegar os clientes
         Result result = session.run("MATCH (cl:Cliente) RETURN cl.cliente, toString(cl.telefone), toString(cl.numero), toString(cl.clID), toString(cl.cep), cl.rua");
 
         // Iterate over the result and print each cliente
@@ -129,7 +129,7 @@ public class SEILATESTANDOoperations {
     //ADD FUNCIONARIO
     public void addFuncionario() {
         try (Session session = driver.session()) {
-            // Your addCliente logic goes here
+            
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter funcionario: ");
             String funcionario = scanner.nextLine();
@@ -143,7 +143,7 @@ public class SEILATESTANDOoperations {
             String email = scanner.nextLine();
  
 
-            // Create a new clienteBeanTest object with the user input
+            
             funcionarioBeanTest funcionarioObject = new funcionarioBeanTest(funcionario, fuID, telefone, salario, email);   
             //Adicionando uma pessoa
             session.run("CREATE (fu:Funcionario {funcionario: $funcionario, fuID: $fuID, telefone: $telefone, salario: $salario, email: $email})",
@@ -170,14 +170,14 @@ public class SEILATESTANDOoperations {
     //UPDATE FUNCIONARIO
     public void updateFuncionario() {
         try (Session session = driver.session()) {
-            // Your updateFuncionario logic goes here
+           
             System.out.print("Enter fuID to update: ");
             String fuID = scanner.nextLine();
 
             System.out.print("Enter new funcionario name: ");
             String funcionarioName = scanner.nextLine();
 
-            // Rest of the code remains the same
+            
             System.out.print("Enter new telefone: ");
             String telefone = scanner.nextLine();
 
@@ -187,7 +187,7 @@ public class SEILATESTANDOoperations {
             System.out.print("Enter new email: ");
             String email = scanner.nextLine();
 
-            // Execute the Cypher query to update the funcionario
+            
             session.run("MATCH (fu:Funcionario {fuID: $fuID}) SET fu.funcionario = $funcionario, fu.telefone = $telefone, fu.salario = $salario, fu.email = $email",
                     Values.parameters("fuID", fuID, "funcionario", funcionarioName, "telefone", telefone,
                             "salario", salario, "email", email));
@@ -198,11 +198,10 @@ public class SEILATESTANDOoperations {
     //LIST FUNCIONARIO
     public void listFuncionario() {
         try (Session session = driver.session()) {
-            // Your listFuncionario logic goes here
-            // Execute the Cypher query to fetch all funcionarios
+
             Result result = session.run("MATCH (fu:Funcionario) RETURN fu.funcionario, fu.fuID, toString(fu.telefone), toString(fu.salario), fu.email");
 
-            // Iterate over the result and print each funcionario
+            
             while (result.hasNext()) {
                 Record record = result.next();
                 String funcionario = record.get(0).asString();
@@ -472,25 +471,6 @@ public class SEILATESTANDOoperations {
     //RELATORIOS e RELACIONAMENTOS************************************************************************************************************************************************************************************************
     //RELATORIOS e RELACIONAMENTOS****************************************************************************************************************************************************************************************************************************
     //LISTA CODIGO DO PEDIDO E O CODIGO DO RESPECTIVO CLIENTE
-    /*
-    public void listarPedidoCliente() {
-        try (Session session = driver.session()) {
-            Result result = session.run("MATCH (pe:Pedido)-[:PEDIDO_DO_CLIENTE]->(cl:Cliente) RETURN pe, cl");
-
-            System.out.println("List of Pedidos and Clientes:");
-            while (result.hasNext()) {
-                Record record = result.next();
-                Node pedidoNode = record.get("pe").asNode();
-                Node clienteNode = record.get("cl").asNode();
-
-                System.out.println("Pedido ID: " + pedidoNode.get("peID").asString());
-                System.out.println("Cliente ID: " + clienteNode.get("clID").asString());
-                // Print other pedido and cliente properties as needed
-                System.out.println("--------------------------------------");
-            }
-        }
-    }
-    */
     public void listarPedidoCliente() {
         try (Session session = driver.session()) {
             Result result = session.run("MATCH (pe:Pedido)-[:PEDIDO_DO_CLIENTE]->(cl:Cliente) RETURN pe, cl");
@@ -515,25 +495,7 @@ public class SEILATESTANDOoperations {
             }
         }
     }   
-    //LISTA PRODUTO E MATERIAL
-   /* public void listarProdutoMaterial() {
-        try (Session session = driver.session()) {
-            Result result = session.run("MATCH (pr:Produto)-[:PRODUTO_DE_MATERIAL]->(ma:Material) RETURN pr, ma");
 
-            System.out.println("List of Produtos and Materiais:");
-            while (result.hasNext()) {
-                Record record = result.next();
-                Node produtoNode = record.get("pr").asNode();
-                Node materialNode = record.get("ma").asNode();
-
-                System.out.println("Produto ID: " + produtoNode.get("prID").asString());
-                System.out.println("Material ID: " + materialNode.get("maID").asString());
-                // Print other produto and material properties as needed
-                System.out.println("--------------------------------------");
-            }
-        }
-    }
-*/
     //LISTA PEDIDO E MATERIAL
     public void listarProdutoMaterial() {
         try (Session session = driver.session()) {
