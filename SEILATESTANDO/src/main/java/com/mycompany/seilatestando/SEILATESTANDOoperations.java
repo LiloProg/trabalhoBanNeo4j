@@ -481,12 +481,12 @@ public class SEILATESTANDOoperations {
                 Node pedidoNode = record.get("pe").asNode();
                 Node clienteNode = record.get("cl").asNode();
 
-                System.out.println("Pedido:");
+                System.out.println("Pedido----");
                 pedidoNode.keys().forEach(key -> {
                     System.out.println(key + ": " + pedidoNode.get(key).asString());
                 });
 
-                System.out.println("Cliente:");
+                System.out.println("Cliente----");
                 clienteNode.keys().forEach(key -> {
                     System.out.println(key + ": " + clienteNode.get(key).asString());
                 });
@@ -507,12 +507,12 @@ public class SEILATESTANDOoperations {
                 Node produtoNode = record.get("pr").asNode();
                 Node materialNode = record.get("ma").asNode();
 
-                System.out.println("Produto:");
+                System.out.println("Produto----");
                 produtoNode.keys().forEach(key -> {
                     System.out.println(key + ": " + produtoNode.get(key).asString());
                 });
 
-                System.out.println("Material:");
+                System.out.println("Material----");
                 materialNode.keys().forEach(key -> {
                     System.out.println(key + ": " + materialNode.get(key).asString());
                 });
@@ -532,12 +532,12 @@ public class SEILATESTANDOoperations {
                 Node pedidoNode = record.get("pe").asNode();
                 Node funcionarioNode = record.get("fu").asNode();
 
-                System.out.println("Pedido:");
+                System.out.println("Pedido----");
                 pedidoNode.keys().forEach(key -> {
                     System.out.println(key + ": " + pedidoNode.get(key).asString());
                 });
 
-                System.out.println("Funcionario:");
+                System.out.println("Funcionario----");
                 funcionarioNode.keys().forEach(key -> {
                     System.out.println(key + ": " + funcionarioNode.get(key).asString());
                 });
@@ -557,12 +557,12 @@ public class SEILATESTANDOoperations {
                 Node pedidoNode = record.get("pe").asNode();
                 Node produtoNode = record.get("pr").asNode();
 
-                System.out.println("Pedido:");
+                System.out.println("Pedido----");
                 pedidoNode.keys().forEach(key -> {
                     System.out.println(key + ": " + pedidoNode.get(key).asString());
                 });
 
-                System.out.println("Produto:");
+                System.out.println("Produto----");
                 produtoNode.keys().forEach(key -> {
                     System.out.println(key + ": " + produtoNode.get(key).asString());
                 });
