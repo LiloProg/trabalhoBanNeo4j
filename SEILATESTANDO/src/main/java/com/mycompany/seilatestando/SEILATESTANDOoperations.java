@@ -314,6 +314,9 @@ public class SEILATESTANDOoperations {
                 parameters("produto", produtoObject.getProduto(), "prID", produtoObject.getPrID(),
                     "materialId", produtoObject.getMaterialId(), "preco", produtoObject.getPreco(), "estoque", 
                     produtoObject.getEstoque(), "tamanho", produtoObject.getTamanho()));
+            //relacionamento
+            session.run("MATCH (pr:Produto {prID: $produtoId}), (ma:Material {maID: $materialId}) CREATE (pr)-[:PRODUTO_DE_MATERIAL]->(ma)",
+            parameters("produtoId", produtoObject.getPrID(), "materialId", produtoObject.getMaterialId()));            
             System.out.println("Produto added successfully!");
         }
     }
