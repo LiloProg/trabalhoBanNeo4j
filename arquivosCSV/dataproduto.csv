@@ -1,0 +1,6 @@
+"codigoproduto","modelo","tamanho","precoproduto","estoqueproduto","codigomaterial"
+1,"cxPizza","pequeno",1.00,1000,2
+2,"cxPizza","medio",2.00,2000,3
+3,"cxPizza","gigante",3.00,2500,3
+4,"por�ao","pequeno",4.00,500,1
+5,"por�ao","medio",5.00,800,1

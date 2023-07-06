@@ -1,0 +1,14 @@
+//INSTRUCOES PARA USAR O BANCO/API
+1.Montar o banco de dados com as querys e o arquivo csv.
+2.É preciso ajustar as querys com base no local onde voce salvou os arquivos.
+3.Eu usei o neo4j desktop para fazer o banco.
+
+
+4.A api foi feita usando java 1.8.0 com maven.
+5.É preciso baixar a pasta do projeto, abrir no netbeans(ou semelhante)
+6.Carregar as dependencias do driver do neo4j usando o maven.
+7.Caso esteja no netbeans é só clicar com o botao direito no projeto e ir na op "load with dependencies".
+
+8.Configurar a senha e o usuriaio na conexao do código da API.
+
+Obs: tem 2 arquivos Dump, a principio o neo4j.dump é para dar certo.

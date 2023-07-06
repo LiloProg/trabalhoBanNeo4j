@@ -1,0 +1,66 @@
+//querys em cypher para montar o banco
+//Precisa ter os arquivo csv (estão no repositroio)
+//CRIACAO TABELA CLIENTE
+LOAD CSV WITH HEADERS FROM "file:///datacliente.csv" AS cliente
+MERGE (cl:Cliente {clID: cliente.codigocliente})
+  ON CREATE SET cl.cliente = cliente.nomecliente, cl.telefone = cliente.telefone, cl.rua = cliente.rua, cl.numero = cliente.numero, cl.cep = cliente.cep;
+
+//CRIACAO TABELA FUNCIONARIO
+LOAD CSV WITH HEADERS FROM "file:///datafuncionario.csv" AS funcionario
+MERGE (fu:Funcionario {fuID: funcionario.codigofuncionario})
+  ON CREATE SET fu.funcionario = funcionario.nomefuncionario, fu.telefone = funcionario.telefone, fu.email = funcionario.email, fu.salario = funcionario.salario;
+
+//CRIACAO TABELA MATERIAL
+LOAD CSV WITH HEADERS FROM "file:///datamaterial.csv" AS material
+MERGE (ma:Material {maID: material.codigomaterial})
+  ON CREATE SET ma.material = material.nomematerial, ma.qualidade = material.qualidadematerial, ma.estoque = material.estoquematerial;
+
+//CRIACAO TABELA PRODUTO
+LOAD CSV WITH HEADERS FROM "file:///dataproduto.csv" AS produto
+MERGE (pr:Produto {prID: produto.codigoproduto})
+  ON CREATE SET pr.produto = produto.modelo, pr.tamanho = produto.tamanho, pr.preco = produto.precoproduto, pr.estoque = produto.estoqueproduto, pr.material = produto.codigomaterial;
+
+//CRIACAO TABELA PEDIDO
+LOAD CSV WITH HEADERS FROM "file:///datapedido.csv" AS pedido
+MERGE (pe:Pedido {peID: pedido.codigopedido})
+  ON CREATE SET pe.preco = pedido.precopedido, pe.metdpagamento = pedido.metdpagamento, pe.cliente = pedido.codigocliente,
+  pe.funcionario = pedido.codigofuncionario, pe.produto = pedido.codigoproduto;
+
+
+//RELACIONAMENTOS ***************************************
+
+//relacionamento produto material
+MATCH (pr:Produto),(ma:Material)
+WHERE pr.material = ma.maID
+CREATE (pr)-[:PRODUTO_DE_MATERIAL]->(ma);
+
+MATCH (pr:Produto)
+REMOVE pr.codigomaterial;
+
+//relacionamentos de pedidos com clientes,funcionarios e produtos
+MATCH (pe:Pedido),(cl:Cliente)
+WHERE pe.cliente = cl.clID
+CREATE (pe)-[:PEDIDO_DO_CLIENTE]->(cl);
+
+MATCH (pe:Pedido)
+REMOVE pe.codigocliente;
+
+
+
+
+MATCH (pe:Pedido),(fu:Funcionario)
+WHERE pe.funcionario = fu.fuID
+CREATE (pe)-[:PEDIDO_DO_FUNCIONARIO]->(fu);
+
+MATCH (pe:Pedido)
+REMOVE pe.codigofuncionario;
+
+
+
+
+MATCH (pe:Pedido),(pr:Produto)
+WHERE pe.produto = pr.prID
+CREATE (pe)-[:PEDIDO_DO_PRODUTO]->(pr);
+
+MATCH (pe:Pedido)
+REMOVE pe.codigoproduto;
